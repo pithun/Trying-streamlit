@@ -16,7 +16,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from sklearn.preprocessing import LabelEncoder
 
-personality = pd.read_csv('mbti_1.csv')
+durl= ('https://raw.githubusercontent.com/pithun/Trying-streamlit/main/mbti_1.csv') 
+personality = pd.read_csv(durl)
 
 labenc = LabelEncoder()
 personality['type_encoded'] = labenc.fit_transform(personality.type)
@@ -208,6 +209,9 @@ def BOW(train_data, test_data, ngrams= 1, max_feat= 3500, split_data = True):
         return (frequency_matrix_tr, frequency_matrix_te)
     else:
         return frequency_matrix_tr 
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
     
 test_data = pd.DataFrame({'posts':[new]})
 
