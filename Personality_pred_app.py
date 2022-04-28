@@ -62,8 +62,11 @@ st.write(new)
 stopwords_better = list(STOPWORDS)
 for remove in ['\'', '^', '^^', 'doe', 'ha', 'wa', '\'s', '\'the', '\'i']:
     stopwords_better.append(remove)
-#import nltk
-#$nltk.download('stopwords')
+
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+
 for a in stopwords.words('english'):
     stopwords_better.append(a)
 stopwords_better = list(set(stopwords_better))
@@ -209,9 +212,7 @@ def BOW(train_data, test_data, ngrams= 1, max_feat= 3500, split_data = True):
         return (frequency_matrix_tr, frequency_matrix_te)
     else:
         return frequency_matrix_tr 
-nltk.download('stopwords')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
+
     
 test_data = pd.DataFrame({'posts':[new]})
 
