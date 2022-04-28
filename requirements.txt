@@ -1,0 +1,10 @@
+pandas
+joblib
+streamlit
+numpy
+Regex
+wordcloud
+nltk
+emot
+scikit-learn
+warnings
