@@ -18,7 +18,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
 
 durl= ('https://raw.githubusercontent.com/pithun/Trying-streamlit/main/mbti_1.csv') 
-personality = pd.read_csv(durl)
+personality = pd.read_csv('mbti_1.csv')
 
 labenc = LabelEncoder()
 personality['type_encoded'] = labenc.fit_transform(personality.type)
@@ -36,6 +36,19 @@ st.text('Several hints about how to best complete this survey:' +'\n'+
     • Answer the questions as “the way you are”, not “the way you’d like to be seen 
       by others”''')
 
+st.markdown(f'<h1 style="color:#FF6347;font-size:24px;">{"Wanna know more about how we are making our Prediction ?"}</h1>', unsafe_allow_html=True)
+
+with st.expander('Expand this by clicking to know more'):
+    st.text('''The data was collected from the posts of people in the personality cafe which 
+is a community where you can.
+    • Follow topics that matter to you
+    • Connect with those who share your interests
+    • Learn from the experts in the community you can also ask, comment, and 
+    connect! \n
+After collection of data using techniques in a branch of Machine learning called
+Natural languaege processing we were able to train a model on that data and make
+these predictions. Pretty cool right ?!!''')
+    
 st.markdown(    """
 <style>
 span[data-baseweb="tag"] {
@@ -43,21 +56,22 @@ span[data-baseweb="tag"] {
 }
 </style>
 """,  unsafe_allow_html=True)
+
+
 questions = ['1. At a party do you: ', '2. Are you more: ', '3. Is it worse to: ', '4. Are you more impressed by: ', '5. Are more drawn toward the: ', '6. Do you prefer to work:', '7. Do you tend to choose: ', '8. At parties do you: ', '9. Are you more attracted to: ', '10. Are you more interested in: ', '11. In judging others are you more swayed by: ', '12. In approaching others is your inclination to be somewhat: ', '13. Are you more: ', '14. Does it bother you more having things: ', '15. In your social groups do you: ', '16. In doing ordinary things are you more likely to: ', '17. Writers should: ', '18. Which appeals to you more: ', '19. Are you more comfortable in making: ', '20. Do you want things: ', '21. Would you say you are more: ', '22. In phoning do you: ', '23. Facts: ', '24. Are visionaries: ', '25. Are you more often: ', '26. Which is more admirable: ', '27. Do you feel better about: ', '28. In company do you: ', '29. Common sense is: ', '30. Children often do not: ', '31. In making decisions do you feel more comfortable with:', '32. Are you more:']
 
-opt1 = ['a. Interact with many, including strangers ', 'a. Realistic than speculative', 'a. Have your “head in the clouds”', 'a. Principles', 'a. Convincing', 'a. To deadlines', 'a. Rather carefully', 'a. Stay late, with increasing energy', 'a. Sensible people', 'a. What is actual', 'a. Laws than circumstances', ' a. Objective', 'a. Punctual', 'a. Incomplete', 'a. Keep abreast of other’s happenings', 'a. Do it the usual way', 'a. “Say what they mean and mean what they say”', 'a. Consistency of thought', 'a. Logical judgment', 'a. Settled and decided', 'a. Serious and determined', 'a. Rarely question that it will all be said', 'a. “Speak for themselves”', 'a. somewhat annoying', 'a. a cool-headed person', 'a. the ability to organize and be methodical', 'a. having purchased', 'a. initiate conversation', 'a. rarely questionable', 'a. make themselves useful enough', 'a. standards', 'a. firm than gentle']
+opt1 = ['Interact with many, including strangers ', 'Realistic than speculative', 'Have your “head in the clouds”', 'Principles', 'Convincing', 'To deadlines', 'Rather carefully', 'Stay late, with increasing energy', 'Sensible people', 'What is actual', 'Laws than circumstances', 'Objective', 'Punctual', 'Incomplete', 'Keep abreast of other’s happenings', 'Do it the usual way', '“Say what they mean and mean what they say”', 'Consistency of thought', 'Logical judgment', 'Settled and decided', 'Serious and determined', 'Rarely question that it will all be said', '“Speak for themselves”', 'somewhat annoying', 'a cool-headed person', 'the ability to organize and be methodical', 'having purchased', 'initiate conversation', 'rarely questionable', 'make themselves useful enough', 'standards', 'firm than gentle']
 
-opt2 = ['b. Interact with a few, known to you', 'b. Speculative than realistic', 'b. Be “in a rut”', 'b. Emotions', 'b. Touching', 'b. Just “whenever”', 'b. Somewhat impulsively', 'b. Leave early with decreased energy', 'b. Imaginative people', 'b. What is possible', 'b. Circumstances than laws', 'b. Personal', 'b. Leisurely', 'b. Completed', 'b. Get behind on the news', 'b. Do it your own way', 'b. Express things more by use of analogy', 'b. Harmonious human relationships', 'b. Value judgments', 'b. Unsettled and undecided', 'b. Easy-going', 'b. Rehearse what you’ll say', 'b. Illustrate principles', 'b. rather fascinating', 'b. a warm-hearted person', 'b. the ability to adapt and make do', 'b. having the option to buy', 'b. wait to be approached', 'b. frequently questionable', 'b. exercise their fantasy enough', 'b. feelings', 'b. gentle than firm']
+opt2 = ['Interact with a few, known to you', 'Speculative than realistic', 'Be “in a rut”', 'Emotions', 'Touching', 'Just “whenever”', 'Somewhat impulsively', 'Leave early with decreased energy', 'Imaginative people', 'What is possible', 'Circumstances than laws', 'Personal', 'Leisurely', 'Completed', 'Get behind on the news', 'Do it your own way', 'Express things more by use of analogy', 'Harmonious human relationships', 'Value judgments', 'Unsettled and undecided', 'Easy-going', 'Rehearse what you’ll say', 'Illustrate principles', 'rather fascinating', 'a warm-hearted person', 'the ability to adapt and make do', 'having the option to buy', 'wait to be approached', 'frequently questionable', 'exercise their fantasy enough', 'feelings', 'gentle than firm']
+
+st.text('\n'+'Below are {} questions to be answered by you. After answering, hit the \n"What\'s my Personality" button and wait a while to know WHAT TRAITS YOU POSSESS'.format(len(opt2)))
 
 new = ''
 for a,b,c in zip(questions, opt1, opt2):
-    cont = st.selectbox(a, ('please choose 1: ', b, c))
-    if cont == 'please choose 1: ':
-        raise ValueError('Please Select a valid option. Either a or b')
-    else:
-        new+=cont[3:]+' '
+    cont = st.radio(a, (b, c))
+    new+=cont+' '
     
-st.write(new)
+#st.write(new)
 
 
 stopwords_better = list(STOPWORDS)
@@ -218,7 +232,7 @@ def BOW(train_data, test_data, ngrams= 1, max_feat= 3500, split_data = True):
     
 test_data = pd.DataFrame({'posts':[new]})
 
-if st.button('What\'s my personality'):
+if st.button('\n What\'s My Personality'):
     with st.spinner('Please wait...'):
         to_predict = BOW(personality, test_data)
         testing_data = to_predict[1]
