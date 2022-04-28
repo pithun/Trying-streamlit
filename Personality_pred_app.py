@@ -5,6 +5,7 @@ import streamlit as st
 # Data Cleaning and preprocessing 
 import numpy as np
 import nltk
+import re
 from wordcloud import STOPWORDS
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
