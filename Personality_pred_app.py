@@ -67,6 +67,7 @@ for remove in ['\'', '^', '^^', 'doe', 'ha', 'wa', '\'s', '\'the', '\'i']:
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('wordnet')
+nltk.download('omw-1.4')
 
 for a in stopwords.words('english'):
     stopwords_better.append(a)
