@@ -12,18 +12,9 @@ from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize
 from emot.emo_unicode import UNICODE_EMOJI, EMOTICONS_EMO
 from sklearn.feature_extraction.text import TfidfVectorizer
-from tqdm import tqdm
+
 
 from sklearn.preprocessing import LabelEncoder
-# EDA
-import matplotlib.pyplot as plt
-import seaborn as sns
-import empiricaldist as emd
-import plotly.express as px
-from wordcloud import WordCloud
-
-import warnings
-warnings.filterwarnings('ignore')
 
 personality = pd.read_csv('mbti_1.csv')
 
